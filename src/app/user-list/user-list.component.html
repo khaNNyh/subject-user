@@ -1,0 +1,26 @@
+<div class="user-panel" *ngIf="selectedUser$ | async as selectedUser">
+  <button class="button" mat-icon-button color="warn" (click)="closePanel()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <h3>Selected User: {{ selectedUser.email }}</h3>
+
+  <h4>Comments:</h4>
+  <div class="comments">
+    <span
+      *ngFor="let comment of userComments$ | async"
+      class="comment-chip"
+      (click)="deleteComment(comment.id)"
+    >
+      {{ comment.comment }}
+    </span>
+  </div>
+</div>
+
+<h2 *ngIf="!(selectedUser$ | async)" style="padding-left: 1rem">User List</h2>
+<div class="user-list">
+  <ul>
+    <li *ngFor="let user of users$ | async" (click)="selectUser(user)">
+      {{ user.email }}
+    </li>
+  </ul>
+</div>
